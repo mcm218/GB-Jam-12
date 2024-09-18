@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://bu3bp1dfad2gp"]
+
+[ext_resource type="Script" path="res://SCRIPTS/waking_up_choreographer.gd" id="1_hsc6r"]
+[ext_resource type="Script" path="res://SCRIPTS/intro_player.gd" id="1_pmtte"]
+[ext_resource type="SpriteFrames" uid="uid://c71kkymwu3fhd" path="res://miner_animation.tres" id="2_w670a"]
+[ext_resource type="TileSet" uid="uid://c7jogp726nc1e" path="res://SPRITES/tileset.tres" id="3_kkrhq"]
+[ext_resource type="Script" path="res://SCRIPTS/Pauser.gd" id="5_sr8gb"]
+[ext_resource type="Texture2D" uid="uid://dp7old50e22e4" path="res://SPRITES/black_screen.png" id="7_1mn31"]
+[ext_resource type="Script" path="res://SCRIPTS/shaker.gd" id="7_eh2pa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jm1nv"]
+size = Vector2(10, 14)
+
+[node name="WakingUp" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["can_climb", "is_pausable", "player"]]
+position = Vector2(-24, 5)
+script = ExtResource("1_pmtte")
+is_player = true
+SPEED = 1000.0
+JUMP_VELOCITY = -200
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+sprite_frames = ExtResource("2_w670a")
+animation = &"standing"
+autoplay = "standing"
+frame_progress = 0.162881
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_jm1nv")
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="TextureMap" type="TileMap" parent="Environment"]
+texture_filter = 1
+tile_set = ExtResource("3_kkrhq")
+collision_animatable = true
+format = 2
+layer_0/name = "Player"
+layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(-262150, 0, 0, -196614, 0, 0, -131078, 0, 0, -65542, 0, 0, -6, 0, 0, 65530, 0, 0, 131066, 0, 0, 65541, 0, 0, 5, 0, 0, -65531, 0, 0, -131067, 0, 0, -196603, 0, 0, -262139, 0, 0, -327675, 0, 0, -262149, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, 196602, 0, 0, 262138, 0, 0, 327674, 0, 0, 327675, 0, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 196613, 0, 0, 131077, 0, 0, 262141, 0, 0, 196605, 0, 0, 131069, 0, 0, -65539, 0, 0, -131075, 0, 0, -196611, 0, 0, 262142, 0, 0, 196606, 0, 0, 131070, 0, 0, -65538, 0, 0, -131074, 0, 0, -196610, 0, 0, 196609, 0, 0, 131073, 0, 0, 65537, 0, 0, 1, 0, 0, -65535, 0, 0, -131071, 0, 0, -196607, 0, 0, -262143, 0, 0, 196610, 0, 0, 131074, 0, 0, 65538, 0, 0, 2, 0, 0, -65534, 0, 0, -131070, 0, 0, -196606, 0, 0, -262142, 0, 0, -262141, 0, 0, -196605, 0, 0, -131069, 0, 0, -65533, 0, 0, 3, 0, 0, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 196612, 0, 0, 131076, 0, 0, 65540, 0, 0, -65532, 0, 0, -131068, 0, 0, -196604, 0, 0, -262140, 0, 0, 4, 0, 0, 262139, 0, 0, 196603, 0, 0, 196604, 0, 0, 262140, 0, 0, 131068, 0, 0, 131067, 0, 0, 65531, 0, 0, 65532, 0, 0, -4, 0, 0, -5, 0, 0, -65541, 0, 0, -65540, 0, 0, -131077, 0, 0, -131076, 0, 0, -196612, 0, 0, -196613, 0, 0, 65544, 0, 0)
+layer_1/name = "Foreground"
+layer_1/tile_data = PackedInt32Array(65535, 2, 0, 0, 2, 0, -327681, 2, 0, -393216, 2, 0, 65534, 2, 0, 65533, 2, 0)
+layer_2/name = "Backgrond"
+layer_2/z_index = -1
+layer_2/tile_data = PackedInt32Array()
+
+[node name="Pauser" type="Node" parent="." node_paths=PackedStringArray("children")]
+script = ExtResource("5_sr8gb")
+children = [NodePath("../CharacterBody2D")]
+
+[node name="waking_up_choreographer" type="Node" parent="." node_paths=PackedStringArray("pauser")]
+script = ExtResource("1_hsc6r")
+pauser = NodePath("../Pauser")
+
+[node name="Blackout" type="Sprite2D" parent="waking_up_choreographer"]
+z_index = 4096
+texture = ExtResource("7_1mn31")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="shaker" type="Node2D" parent="Camera2D" groups=["is_pausable"]]
+script = ExtResource("7_eh2pa")
+h_amplitude = 10.0
+h_frequency = 8.0

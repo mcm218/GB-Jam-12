@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1f2qjxiu673t"]
+
+[ext_resource type="Script" path="res://SCRIPTS/path_follower.gd" id="1_s556j"]
+[ext_resource type="Texture2D" uid="uid://dh4kbkuxiq2kb" path="res://SPRITES/player_character-export.png" id="2_jciyh"]
+
+[sub_resource type="Curve2D" id="Curve2D_65i5g"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 7, 37, 0, 0, 0, 0, 7, 6, 0, 0, 0, 0, -8, 6, 0, 0, 0, 0, -9.8955, -42.1328, 0, 0, 0, 0, 8, -42, 0, 0, 0, 0, 8.90595, -89.2814, 0, 0, 0, 0, -8.90595, -89.2814, 0, 0, 0, 0, -7.9164, -170.538)
+}
+point_count = 8
+
+[node name="PathFollow2D" type="PathFollow2D"]
+position = Vector2(7, 37)
+rotation = -1.59207
+rotates = false
+loop = false
+script = ExtResource("1_s556j")
+speed = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_jciyh")
+
+[node name="_Timer_164175" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Miner 1" type="Path2D" parent="."]
+curve = SubResource("Curve2D_65i5g")

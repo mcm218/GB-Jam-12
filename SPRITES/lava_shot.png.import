@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh4kbkuxiq2kb"
-path="res://.godot/imported/player_character-export.png-4015387a2c79d162bffba5b5110d0fce.ctex"
+uid="uid://sx61gmr8osl3"
+path="res://.godot/imported/lava_shot.png-96f44cec4b8a9b4fe2093abc65b8d58e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SPRITES/player_character-export.png"
-dest_files=["res://.godot/imported/player_character-export.png-4015387a2c79d162bffba5b5110d0fce.ctex"]
+source_file="res://SPRITES/lava_shot.png"
+dest_files=["res://.godot/imported/lava_shot.png-96f44cec4b8a9b4fe2093abc65b8d58e.ctex"]
 
 [params]
 

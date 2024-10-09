@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://binbgsbecrrco"]
+[gd_scene load_steps=5 format=3 uid="uid://binbgsbecrrco"]
 
 [ext_resource type="Script" path="res://SCRIPTS/path_follower.gd" id="1_ms16r"]
 [ext_resource type="SpriteFrames" uid="uid://c71kkymwu3fhd" path="res://miner_animation.tres" id="2_018i8"]
+[ext_resource type="Script" path="res://utilities/scripts/Hitbox2DComponent.gd" id="3_541yt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qt8gd"]
+size = Vector2(14.2096, 9.69993)
 
 [node name="PathFollow2D" type="PathFollow2D" groups=["is_pausable"]]
 position = Vector2(7, 37)
@@ -13,4 +17,13 @@ script = ExtResource("1_ms16r")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
 sprite_frames = ExtResource("2_018i8")
-animation = &"climbing"
+animation = &"standing"
+offset = Vector2(2.08165e-12, -8)
+
+[node name="Hitbox2DComponent" type="Area2D" parent="."]
+script = ExtResource("3_541yt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox2DComponent"]
+position = Vector2(-3.8147e-06, 0)
+shape = SubResource("RectangleShape2D_qt8gd")
+disabled = true

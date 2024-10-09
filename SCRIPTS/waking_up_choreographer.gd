@@ -1,7 +1,7 @@
 extends Node
 
 @export var pauser: Node
-@onready var blackout: Sprite2D = $Blackout
+@onready var blackout: AnimatedSprite2D = $Blackout
 @export var blackout_duration: float = 5.0
 @export var next_scene: PackedScene
 
@@ -13,17 +13,20 @@ var is_complete: bool = false
 func _ready():
 	print_debug("transitioning")
 	blackout.visible = true
-	blackout.modulate.a = 1
+	blackout.play("default")
 
 
 func _process(delta):
 	counter += delta
 	if is_complete: return
 		
-	if blackout.modulate.a < 0.5 and pauser.is_paused:
+	if blackout.frame > 15 and pauser.is_paused:
 		pauser.play()
-		
-	blackout.modulate.a = max(0,(1 - (counter / blackout_duration)))
 	
-	if blackout.modulate.a == 0:
+	if blackout.frame == 23:
 		is_complete = true
+
+
+func _on_transition_body_entered(body):
+	if body.is_in_group("player") and next_scene:
+		get_tree().change_scene_to_packed(next_scene)

@@ -3,7 +3,7 @@ extends Node
 # TODO: This can prob just be a signal
 @export var children: Array[Node] = []
 
-var is_paused = true;
+@export var is_paused = true;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
